@@ -89,7 +89,6 @@ components:
                 Paused: False
               - EquipmentId: 123e4567-e89b-12d3-a456-426614174001
                 Paused: True
-                TrayPosition: Raised
     MachineTeleoperationRequest:
       summary: Machine command message to send
       payload:
@@ -117,18 +116,6 @@ components:
             EquipmentId: 123e4567-e89b-12d3-a456-426614174000
             MachineTeleoperationRequestV1:
               Command: Pause
-              RequestId: 123e4567-e89b-12d3-a456-426614174001
-        - name: MachineTeleoperationRequestArgsExample
-          summary: Example of a machine command message with arguments
-          payload:
-            Protocol: Open-Autonomy
-            Version: 1
-            Timestamp: '2021-09-01T12:00:00Z'
-            EquipmentId: 123e4567-e89b-12d3-a456-426614174000
-            MachineTeleoperationRequestV1:
-              Command: RaiseTray
-              Arguments:
-                Angle: 30
               RequestId: 123e4567-e89b-12d3-a456-426614174001
     MachineTeleoperationResponse:
       summary: Machine command response message
@@ -259,11 +246,6 @@ components:
         Command:
           type: string
           description: Command to send to the equipment
-        Arguments:
-          title: CommandArguments
-          type: object
-          description: Command arguments key-value pairs
-          additionalProperties: true
         RequestId:
           type: string
           description: Request identifier
