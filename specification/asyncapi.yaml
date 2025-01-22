@@ -1,0 +1,320 @@
+asyncapi: 3.0.0
+info:
+  title: Machine Teleoperation Messages
+  version: 1.0.0
+  description: |-
+    <p>
+      Teleoperation messages provides the ability to control equipment remotely from client and to provide machine teleoperation state status to clients.
+    </p>
+    <p>
+      Teleoperation commands are limited to equipment controls that are not safety critical,
+      and are not to be used for equipment movement in position.
+    </p>
+    <p>
+      The messages are to conform with <a href="">Open Autonomy</a> naming standard
+    </p>
+
+channels: 
+  machineTeleoperation:
+    address: AHS
+    messages:
+      MachineTeleoperationStatus:
+        $ref: '#/components/messages/MachineTeleoperationStatus'
+      MachineTeleoperationResponse:
+        $ref: '#/components/messages/MachineTeleoperationResponse'
+      MachineTeleoperationException:
+        $ref: '#/components/messages/MachineTeleoperationException'
+  machineTeleoperationRequest:
+    address: AHS
+    messages:
+      MachineTeleoperationRequest:
+        $ref: '#/components/messages/MachineTeleoperationRequest'
+
+operations: 
+  MachineTeleoperationStatusListener:
+    summary: Listens to machine status / state changes
+    channel:
+      $ref: '#/channels/machineTeleoperation'
+    action: send
+    messages:
+      - $ref: '#/channels/machineTeleoperation/messages/MachineTeleoperationStatus'
+  MachineTeleoperationResponseListener:
+    summary: Listens to machine command responses
+    channel:
+      $ref: '#/channels/machineTeleoperation'
+    action: send
+    messages:
+      - $ref: '#/channels/machineTeleoperation/messages/MachineTeleoperationResponse'
+  MachineTeleoperationExceptionListener:
+    summary: Listens to machine exceptions
+    channel:
+      $ref: '#/channels/machineTeleoperation'
+    action: send
+    messages:
+      - $ref: '#/channels/machineTeleoperation/messages/MachineTeleoperationException'
+  MachineTeleoperationRequest:
+    summary: Sends a command to the machine
+    channel:
+      $ref: '#/channels/machineTeleoperationRequest'
+    action: receive
+    messages:
+      - $ref: '#/channels/machineTeleoperationRequest/messages/MachineTeleoperationRequest'
+    bindings:
+      http:
+        method: POST
+        
+components:
+  messages:
+    MachineTeleoperationStatus:
+      summary: Machine status message
+      payload:
+        allOf:
+        - $ref: '#/components/schemas/BaseHeaders'
+        - title: MachineTeleoperationStateV1List
+          type: object
+          properties:
+            MachineTeleoperationStateV1:
+              type: array
+              items:
+                $ref: '#/components/schemas/MachineTeleoperationStateV1'
+      examples:
+        - name: MachineTeleoperationStatusExample
+          summary: Example of a machine status message
+          payload:
+            Protocol: Open-Autonomy
+            Version: 1
+            Timestamp: '2021-09-01T12:00:00Z'
+            MachineTeleoperationStateV1:
+              - EquipmentId: 123e4567-e89b-12d3-a456-426614174000
+                Paused: False
+              - EquipmentId: 123e4567-e89b-12d3-a456-426614174001
+                Paused: True
+                TrayPosition: Raised
+    MachineTeleoperationRequest:
+      summary: Machine command message to send
+      payload:
+        allOf:
+        - $ref: '#/components/schemas/BaseHeaders'
+        - title: MachineTeleoperationRequest
+          type: object
+          required:
+            - EquipmentId
+            - MachineTeleoperationRequestV1
+          properties:
+            EquipmentId:
+              type: string
+              description: Equipment identifier
+              format: uuid
+            MachineTeleoperationRequestV1:
+              $ref: '#/components/schemas/MachineTeleoperationRequestV1'
+      examples:
+        - name: MachineTeleoperationRequestExample
+          summary: Example of a machine command message
+          payload:
+            Protocol: Open-Autonomy
+            Version: 1
+            Timestamp: '2021-09-01T12:00:00Z'
+            EquipmentId: 123e4567-e89b-12d3-a456-426614174000
+            MachineTeleoperationRequestV1:
+              Command: Pause
+              RequestId: 123e4567-e89b-12d3-a456-426614174001
+        - name: MachineTeleoperationRequestArgsExample
+          summary: Example of a machine command message with arguments
+          payload:
+            Protocol: Open-Autonomy
+            Version: 1
+            Timestamp: '2021-09-01T12:00:00Z'
+            EquipmentId: 123e4567-e89b-12d3-a456-426614174000
+            MachineTeleoperationRequestV1:
+              Command: RaiseTray
+              Arguments:
+                Angle: 30
+              RequestId: 123e4567-e89b-12d3-a456-426614174001
+    MachineTeleoperationResponse:
+      summary: Machine command response message
+      payload:
+        allOf:
+        - $ref: '#/components/schemas/BaseHeaders'
+        - title: MachineTeleoperationResponse
+          type: object
+          required:
+            - EquipmentId
+            - MachineTeleoperationResponseV1
+          properties:
+            EquipmentId:
+              type: string
+              description: Equipment identifier
+              format: uuid
+            CorrelationId:
+              type: string
+              description: Correlation identifier
+              format: uuid
+            MachineTeleoperationResponseV1:
+              $ref: '#/components/schemas/MachineTeleoperationResponseV1'
+      examples:
+        - name: MachineTeleoperationResponseAcceptedExample
+          summary: Example of a machine command response message
+          payload:
+            Protocol: Open-Autonomy
+            Version: 1
+            Timestamp: '2021-09-01T12:00:00Z'
+            EquipmentId: 123e4567-e89b-12d3-a456-426614174000
+            CorrelationId: 00000000-0000-0000-0000-000000000000
+            MachineTeleoperationResponseV1:
+              Response: Accepted
+              ResponseCode: 0
+              RequestId: 123e4567-e89b-12d3-a456-426614174001
+        - name: MachineTeleoperationResponseRejectedExample
+          summary: Example of a machine command response message
+          payload:
+            Protocol: Open-Autonomy
+            Version: 1
+            Timestamp: '2021-09-01T12:00:00Z'
+            EquipmentId: 123e4567-e89b-12d3-a456-426614174000
+            CorrelationId: 00000000-0000-0000-0000-000000000000
+            MachineTeleoperationResponseV1:
+              Response: Rejected
+              ResponseCode: 2
+              RequestId: 123e4567-e89b-12d3-a456-426614174001
+              Detail: Command cannot be executed
+    MachineTeleoperationException:
+      summary: Machine exception message
+      payload:
+        allOf:
+        - $ref: '#/components/schemas/BaseHeaders'
+        - title: MachineTeleoperationException
+          type: object
+          required:
+            - EquipmentId
+            - MachineTeleoperationExceptionV1
+          properties:
+            EquipmentId:
+              type: string
+              description: Equipment identifier
+              format: uuid
+            CorrelationId:
+              type: string
+              description: Correlation identifier
+              format: uuid
+            MachineTeleoperationExceptionV1:
+              $ref: '#/components/schemas/MachineTeleoperationExceptionV1'
+      examples:
+        - name: MachineTeleoperationExceptionExample
+          summary: Example of a machine exception message
+          payload:
+            Protocol: Open-Autonomy
+            Version: 1
+            Timestamp: '2021-09-01T12:00:00Z'
+            EquipmentId: 123e4567-e89b-12d3-a456-426614174000
+            MachineTeleoperationExceptionV1:
+              ExceptionCode: 27
+              Detail: I've fallen and cannot get up
+  schemas:
+    BaseHeaders:
+      title: BaseHeaders
+      description: Base headers fields for all messages
+      type: object
+      required:
+        - Protocol
+        - Version
+        - Timestamp
+      properties:
+        Protocol:
+          type: string
+          description: Protocol type
+        Version:
+          type: integer
+          description: Protocol version
+        Timestamp:
+          type: string
+          format: date-time
+          description: datetime of the message in ISO 8601 format
+      example:
+        Protocol: Open-Autonomy
+        Version: 1
+        Timestamp: '2021-09-01T12:00:00Z'
+    MachineTeleoperationStateV1:
+      title: MachineTeleoperationStateV1
+      description: Current machine state status, individual machine state as key-value pairs
+      type: object
+      required:
+        - EquipmentId
+      properties:
+        EquipmentId:
+          type: string
+          description: Equipment identifier
+          format: uuid
+      additionalProperties: true
+      example:
+        EquipmentId: 123e4567-e89b-12d3-a456-426614174000
+        Paused: False
+    MachineTeleoperationRequestV1:
+      title: MachineTeleoperationRequestV1
+      description: Machine Command to send
+      type: object
+      required:
+        - Command
+        - RequestId
+      properties:
+        Command:
+          type: string
+          description: Command to send to the equipment
+        Arguments:
+          title: CommandArguments
+          type: object
+          description: Command arguments key-value pairs
+          additionalProperties: true
+        RequestId:
+          type: string
+          description: Request identifier
+          format: uuid
+      example:
+        Command: Pause
+        RequestId: 123e4567-e89b-12d3-a456-426614174001
+    MachineTeleoperationResponseV1:
+      title: MachineTeleoperationResponseV1
+      description: Machine Command response
+      type: object
+      required:
+        - Response
+        - ResponseCode
+        - RequestId
+      properties:
+        Response:
+          type: string
+          description: Response to the command
+          enum:
+            - Accepted
+            - Rejected
+        ResponseCode:
+          type: integer
+          description: Response code
+        RequestId:
+          type: string
+          description: Request identifier
+          format: uuid
+        Detail:
+          type: string
+          description: Human readable response information
+      example:
+        Response: Accepted
+        ResponseCode: 0
+        RequestId: 123e4567-e89b-12d3-a456-426614174001
+    MachineTeleoperationExceptionV1:
+      title: MachineTeleoperationExceptionV1
+      description: Machine exception message
+      type: object
+      required:
+        - ExceptionCode
+        - Detail
+      properties:
+        ExceptionCode:
+          type: integer
+          description: Exception code
+        Detail:
+          type: string
+          description: Human readable exception message
+      example:
+        ExceptionCode: 27
+        Detail: I've fallen and cannot get up
+    
