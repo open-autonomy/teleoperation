@@ -149,7 +149,6 @@ components:
             CorrelationId: 00000000-0000-0000-0000-000000000000
             MachineTeleoperationResponseV1:
               Response: Accepted
-              ResponseCode: 0
               RequestId: 123e4567-e89b-12d3-a456-426614174001
         - name: MachineTeleoperationResponseRejectedExample
           summary: Example of a machine command response message
@@ -161,9 +160,9 @@ components:
             CorrelationId: 00000000-0000-0000-0000-000000000000
             MachineTeleoperationResponseV1:
               Response: Rejected
-              ResponseCode: 2
+              Reason: CommandCannotBeExecuted
               RequestId: 123e4567-e89b-12d3-a456-426614174001
-              Detail: Command cannot be executed
+              Detail: Command cannot be executed due to safety reasons
     MachineTeleoperationException:
       summary: Machine exception message
       payload:
@@ -194,7 +193,7 @@ components:
             Timestamp: '2021-09-01T12:00:00Z'
             EquipmentId: 123e4567-e89b-12d3-a456-426614174000
             MachineTeleoperationExceptionV1:
-              ExceptionCode: 27
+              Reason: Fallen
               Detail: I've fallen and cannot get up
   schemas:
     BaseHeaders:
@@ -259,7 +258,6 @@ components:
       type: object
       required:
         - Response
-        - ResponseCode
         - RequestId
       properties:
         Response:
@@ -268,35 +266,34 @@ components:
           enum:
             - Accepted
             - Rejected
-        ResponseCode:
-          type: integer
-          description: Response code
+        Reason:
+          type: string
+          description: Response rejection reason enumeration
         RequestId:
           type: string
           description: Request identifier
           format: uuid
         Detail:
           type: string
-          description: Human readable response information
+          description: Human readable rejection response message
       example:
         Response: Accepted
-        ResponseCode: 0
         RequestId: 123e4567-e89b-12d3-a456-426614174001
     MachineTeleoperationExceptionV1:
       title: MachineTeleoperationExceptionV1
       description: Machine exception message
       type: object
       required:
-        - ExceptionCode
+        - Reason
         - Detail
       properties:
-        ExceptionCode:
-          type: integer
-          description: Exception code
+        Reason:
+          type: string
+          description: Exception reason enumeration
         Detail:
           type: string
           description: Human readable exception message
       example:
-        ExceptionCode: 27
+        Reason: Fallen
         Detail: I've fallen and cannot get up
     
