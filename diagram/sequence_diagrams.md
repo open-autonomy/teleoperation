@@ -117,7 +117,7 @@ The following sections describes when the messages should be sent during the lif
 >     note over FMS, AHT_1: Exception occured when actioning
 >     AHT_1 -->> AHS: Exception
 >     AHS -) FMS: Send MachineTeleoperationExceptionV1 of the occurred exception
-    > Note right of FMS: Propose to have a new message MachineTeleoperationExceptionV1 for sending exceptions
+> Note right of FMS: Propose to have a new message MachineTeleoperationExceptionV1 for sending exceptions
 >     AHS -) FMS: Send MachineTeleoperationStateV1    
 >   end
 > ```
