@@ -22,7 +22,7 @@ The purpose of Teleoperation interface is to provide and define capbility for Fl
 > | Resume  | To resume a paused equipment's operation | 
 
 #### Official Open-Autonomy Supported Teleoperation State
-> State property keys that are reserved in the `MachineTeleoperationRequestV1` message.
+> State property keys that are reserved for in the `MachineTeleoperationStateV1` message.
 > | Key | Type | Values | Description |
 > | --- | ---- | ------ | ----------- |
 > | Puased | Boolean | [True, False] | A boolean state property that is used to define define whether the equipment is paused or not|
