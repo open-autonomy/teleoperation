@@ -32,7 +32,7 @@ The following sections describes when the messages should be sent during the lif
 > See [On Connect Sequence Diagram](./teleoperation-on-connect-sequence.svg) if above mermaid code cannot be rendered.
 
 > ## Command Accepted
-> When the FMS sends a teleoperation request to the AHS through a REST > .> endpoint and the request is accepted by AHT.
+> When the FMS sends a teleoperation request to the AHS through a REST endpoint and the request is accepted by AHT.
 > The following shall happen in sequential,
 > 1.  AHS shall response to the REST request with 202 Accepted, if capabable of processing the command and send to the vehicle.
 > 2. The AHS shall send back teleoperation response message to FMS when AHT accepted the command via the WebSocket.
