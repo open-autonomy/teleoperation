@@ -34,7 +34,7 @@ The following sections describes when the messages should be sent during the lif
 > ## Command Accepted
 > When the FMS sends a teleoperation request to the AHS through a REST endpoint and the request is accepted by AHT.
 > The following shall happen in sequential,
-> 1.  AHS shall response to the REST request with 202 Accepted, if capabable of processing the command and send to the vehicle.
+> 1.  AHS shall response to the REST request with 202 Accepted, if capable of processing the command and send to the vehicle.
 > 2. The AHS shall send back teleoperation response message to FMS when AHT accepted the command via the WebSocket.
 > 3. Finally AHS shall sent back the teleoperation state if there are changes to the state after actioning via the WebSocket.
 > ```mermaid
@@ -62,7 +62,7 @@ The following sections describes when the messages should be sent during the lif
 > See [Command Accepted Sequence Diagram](./teleoperation-command-accepted-sequence.svg) if above mermaid code cannot be rendered.
 
 > ## Command Rejected
-> When the FMS sends a teleoperation request to the AHS through a REST > endpoint and the request is rejected.
+> When the FMS sends a teleoperation request to the AHS through a REST endpoint and the request is rejected.
 > Two different parties can reject the request.
 > 1. The AHS rejects the REST reqest, [4xx, 5xx]. <br/>
 > AHS not able to proceed with sending command to equipment. <br/>
@@ -93,7 +93,7 @@ The following sections describes when the messages should be sent during the lif
 > See [Command Rejected Sequence Diagram](./teleoperation-command-rejected-sequence.svg) if above mermaid code cannot be rendered.
 
 > ## Exception Occurred
-> When the FMS sends a teleoperation request to the AHS through a REST endpoint and the request is accepted, However, error occurred when actioning the reques. <br/>
+> When the FMS sends a teleoperation request to the AHS through a REST endpoint and the request is accepted, However, error occurred when actioning the request. <br/>
 > Then the following shall happen:
 > 1. AHT reports error back to AHS
 > 2. AHS sends teleoperation exception message to FMS via the WebSocket
