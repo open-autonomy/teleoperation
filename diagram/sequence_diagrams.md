@@ -69,7 +69,7 @@ The following sections describes when the messages should be sent during the lif
 > In example:
 >     - Malform Request
 >     - Server Error
-> 2. AHS accepts REST request **BUT** AHT rejects the request from AHS, then AHS shall response with a teleoperation response message that ATS reject the request and the reason behind rejection via the WebSocket.
+> 2. AHS accepts REST request **BUT** AHT rejects the request from AHS, then AHS shall response with a teleoperation response message that AHT reject the request and the reason behind rejection via the WebSocket.
 > ```mermaid
 > %% Teleoperation Command Request Rejected Sequence
 > sequenceDiagram
