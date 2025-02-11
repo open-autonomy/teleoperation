@@ -64,7 +64,7 @@ The following sections describes when the messages should be sent during the lif
 > ## Command Rejected
 > When the FMS sends a teleoperation request to the AHS through a REST endpoint and the request is rejected.
 > Two different parties can reject the request.
-> 1. The AHS rejects the REST reqest, [4xx, 5xx]. <br/>
+> 1. The AHS rejects the REST request, [4xx, 5xx]. <br/>
 > AHS not able to proceed with sending command to equipment. <br/>
 > In example:
 >     - Malform Request
