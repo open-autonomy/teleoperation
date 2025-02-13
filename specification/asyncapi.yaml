@@ -91,6 +91,15 @@ components:
                 Paused: True
     MachineTeleoperationRequest:
       summary: Machine command message to send
+      headers:
+        type: object
+        required:
+          - X-Correlation-ID
+        properties:
+          X-Correlation-ID:
+            type: string
+            description: Equipment identifier
+            format: uuid
       payload:
         allOf:
         - $ref: '#/components/schemas/BaseHeaders'
