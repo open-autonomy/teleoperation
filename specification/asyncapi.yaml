@@ -91,15 +91,6 @@ components:
                 Paused: True
     MachineTeleoperationRequest:
       summary: Machine command message to send
-      headers:
-        type: object
-        required:
-          - X-Correlation-ID
-        properties:
-          X-Correlation-ID:
-            type: string
-            description: Equipment identifier
-            format: uuid
       payload:
         allOf:
         - $ref: '#/components/schemas/BaseHeaders'
@@ -141,10 +132,6 @@ components:
               type: string
               description: Equipment identifier
               format: uuid
-            CorrelationId:
-              type: string
-              description: Correlation identifier
-              format: uuid
             MachineTeleoperationResponseV1:
               $ref: '#/components/schemas/MachineTeleoperationResponseV1'
       examples:
@@ -155,7 +142,6 @@ components:
             Version: 1
             Timestamp: '2021-09-01T12:00:00Z'
             EquipmentId: 123e4567-e89b-12d3-a456-426614174000
-            CorrelationId: 00000000-0000-0000-0000-000000000000
             MachineTeleoperationResponseV1:
               Response: Accepted
               RequestId: 123e4567-e89b-12d3-a456-426614174001
@@ -166,7 +152,6 @@ components:
             Version: 1
             Timestamp: '2021-09-01T12:00:00Z'
             EquipmentId: 123e4567-e89b-12d3-a456-426614174000
-            CorrelationId: 00000000-0000-0000-0000-000000000000
             MachineTeleoperationResponseV1:
               Response: Rejected
               Reason: CommandCannotBeExecuted
@@ -186,10 +171,6 @@ components:
             EquipmentId:
               type: string
               description: Equipment identifier
-              format: uuid
-            CorrelationId:
-              type: string
-              description: Correlation identifier
               format: uuid
             MachineTeleoperationExceptionV1:
               $ref: '#/components/schemas/MachineTeleoperationExceptionV1'
