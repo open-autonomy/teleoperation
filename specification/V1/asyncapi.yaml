@@ -69,7 +69,7 @@ components:
       summary: Machine status message
       payload:
         allOf:
-        - $ref: '#/components/schemas/BaseHeaders'
+        - $ref: '#/components/schemas/MessageHeaders'
         - title: MachineTeleoperationStateV1List
           type: object
           properties:
@@ -93,7 +93,7 @@ components:
       summary: Machine command message to send
       payload:
         allOf:
-        - $ref: '#/components/schemas/BaseHeaders'
+        - $ref: '#/components/schemas/MessageHeaders'
         - title: MachineTeleoperationRequest
           type: object
           required:
@@ -121,7 +121,7 @@ components:
       summary: Machine command response message
       payload:
         allOf:
-        - $ref: '#/components/schemas/BaseHeaders'
+        - $ref: '#/components/schemas/MessageHeaders'
         - title: MachineTeleoperationResponse
           type: object
           required:
@@ -161,7 +161,7 @@ components:
       summary: Machine exception message
       payload:
         allOf:
-        - $ref: '#/components/schemas/BaseHeaders'
+        - $ref: '#/components/schemas/MessageHeaders'
         - title: MachineTeleoperationException
           type: object
           required:
@@ -186,8 +186,8 @@ components:
               Reason: Fallen
               Detail: I've fallen and cannot get up
   schemas:
-    BaseHeaders:
-      title: BaseHeaders
+    MessageHeaders:
+      title: MessageHeaders
       description: Base headers fields for all messages
       type: object
       required:
@@ -220,6 +220,9 @@ components:
           type: string
           description: Equipment identifier
           format: uuid
+        Paused:
+          type: boolean
+          description: Indicates if the machine is paused
       additionalProperties: true
       example:
         EquipmentId: 123e4567-e89b-12d3-a456-426614174000
