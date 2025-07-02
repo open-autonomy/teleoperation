@@ -16,7 +16,8 @@ The `SyncAllTruckStatesV1` message consists of an array of the following object.
 | `"Paused"` | [`True`, `False`] | Boolean | False | Determine whether the machine is paused |
 | Additional keys allowed | 
 
-**NOTE**: Additional state properties that are not officially mentioned in the above attributes table may not be supported by AHS and FMS. Should the *additional keys* be supported and handled, will be implementation specific of the AHS and FMS vendor.
+>[!NOTE]
+> This list is not exhaustive and more teleoperations can be added in the future.
 
 ## Examples
 ### Typical Message

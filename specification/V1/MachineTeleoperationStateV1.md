@@ -15,10 +15,13 @@ The `MachineTeleoperationStateV1` message consists of the following object.
 | `"Paused"` | [`True`, `False`] | Boolean | False | Determine whether the machine is paused |
 | Additional keys allowed | 
 
+One or more machine teleoperation states can be sent in a message. At a minimum, the message must include the state that has changed.
+
 >[!NOTE]
 > The top-level message headers should contain the `EquipmentId`, indicating which AV the `MachineTeleoperationStateV1` message is for.
 
-**NOTE**: Additional state properties that are not officially mentioned in the above attributes table may not be supported by AHS and FMS. Should the *additional keys* be supported and handled, will be implementation specific of the AHS and FMS vendor.
+>[!NOTE]
+> This list is not exhaustive and more teleoperations can be added in the future.
 
 ## Examples
 ### Typical Message
