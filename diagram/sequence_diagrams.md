@@ -123,4 +123,5 @@ The following sections describes when the messages should be sent during the lif
 > ```
 > See [Exception Occurred Sequence Diagram](./teleoperation-exception-occurred-sequence.svg) if above mermaid code cannot be rendered.
 
-**NOTE** AHS shall sent machine teleoperation state whenever there's a state change on the AHT.
+>[!NOTE]
+> AHS shall sent machine teleoperation state whenever there's a state change on the AHT.
