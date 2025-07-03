@@ -1,10 +1,10 @@
 # MachineTeleoperationStateV1
 
-This message is sent by the Teleoepration when there are changes in machine teleoperation state.
+This message is sent by the Teleoperation when there are changes in machine teleoperation state.
 
 | Sender | Triggered by | Triggers |
 | --- | --- | --- |
-| `AHS`  | Machine teleoperation state changes | When a machines state has been changed.<br/>To provide machine teleoperation states to `FMS` |
+| `AHS`  | Machine teleoperation state changes | When a machine's state has been changed.<br/>To provide the teleoperation state of a machine to `FMS` |
 
 ## Message Attributes
 

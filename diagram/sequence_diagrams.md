@@ -26,7 +26,7 @@ The following sections describes when the messages should be sent during the lif
 >        AHS ->>+ ... AHT_n: Get AV status / state
 >        ... AHT_n -->>- AHS: Send AV status / state
 >    end
->    AHS --) FMS: SyncAllTruckStatesV1[]
+>    AHS --) FMS: SyncFleetTeleoperationStatesV1[]
 >    Note right of ... AHT_n: AHTs and AVs are interchangable terminology
 > ```
 > See [On Connect Sequence Diagram](./teleoperation-on-connect-sequence.svg) if above mermaid code cannot be rendered.
@@ -124,4 +124,4 @@ The following sections describes when the messages should be sent during the lif
 > See [Exception Occurred Sequence Diagram](./teleoperation-exception-occurred-sequence.svg) if above mermaid code cannot be rendered.
 
 >[!NOTE]
-> AHS shall sent machine teleoperation state whenever there's a state change on the AHT.
+> AHS shall send machine teleoperation state whenever there is a state change on the AHT.

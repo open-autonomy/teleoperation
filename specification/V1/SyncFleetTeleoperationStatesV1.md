@@ -1,6 +1,6 @@
-# SyncAllTruckStatesV1
+# SyncFleetTeleoperationStatesV1
 
-This message is sent by the Teleoepration when FMS and AHS initially connected.
+This message is sent by the Teleoperation when FMS and AHS initially connected.
 
 | Sender | Triggered by | Triggers |
 | --- | --- | --- |
@@ -8,7 +8,7 @@ This message is sent by the Teleoepration when FMS and AHS initially connected.
 
 ## Message Attributes
 
-The `SyncAllTruckStatesV1` message consists of an array of the following object.
+The `SyncFleetTeleoperationStatesV1` message consists of an array of the following object.
 
 | Key | Value | Format | Required | Description |
 | --- | :---: | :---: | :---: | --- |
@@ -26,7 +26,7 @@ The `SyncAllTruckStatesV1` message consists of an array of the following object.
   "Protocol": "Open-Autonomy",
   "Version": 1,
   "Timestamp": "2021-09-01T12:00:00Z",
-  "SyncAllTruckStatesV1": [
+  "SyncFleetTeleoperationStatesV1": [
     {
       "EquipmentId": "123e4567-e89b-12d3-a456-426614174000",
       "Paused": false
@@ -45,7 +45,7 @@ The `SyncAllTruckStatesV1` message consists of an array of the following object.
   "Protocol": "Open-Autonomy",
   "Version": 1,
   "Timestamp": "2021-09-01T12:00:00Z",
-  "SyncAllTruckStatesV1": [
+  "SyncFleetTeleoperationStatesV1": [
     {
       "EquipmentId": "123e4567-e89b-12d3-a456-426614174000",
       "Paused": false,
