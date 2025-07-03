@@ -18,15 +18,15 @@ The following sections describes when the messages should be sent during the lif
 >    FMS->AHS: WebSocket Connection
 >   par AHS to AHT_1
 >        AHS ->>+ AHT_1: Get AV status / state
->        AHT_1 -->>- AHS: MachineTeleoperationStateV1
+>        AHT_1 -->>- AHS: Send AV status / state
 >    and AHS to AHT_2
 >        AHS ->>+ AHT_2: Get AV status / state
->        AHT_2 -->>- AHS: MachineTeleoperationStateV1
+>        AHT_2 -->>- AHS: Send AV status / state
 >    and AHS to ... AHT_n
 >        AHS ->>+ ... AHT_n: Get AV status / state
->        ... AHT_n -->>- AHS: MachineTeleoperationStateV1
+>        ... AHT_n -->>- AHS: Send AV status / state
 >    end
->    AHS --) FMS: MachineTeleoperationStateV1[]
+>    AHS --) FMS: SyncFleetTeleoperationStatesV1[]
 >    Note right of ... AHT_n: AHTs and AVs are interchangable terminology
 > ```
 > See [On Connect Sequence Diagram](./teleoperation-on-connect-sequence.svg) if above mermaid code cannot be rendered.
@@ -48,12 +48,12 @@ The following sections describes when the messages should be sent during the lif
 >   note over FMS, ... AHT_n: On Connect Sequence
 >   FMS ->>+ AHS: POST MachineTeleoperationRequestV1 for AHT_1
 >   AHS -->> FMS: Accepted POST MachineTeleoperationRequestV1 for AHT_1
->   AHS ->>+ AHT_1: Send MachineTeleoperationRequestV1
->   AHT_1 -->>- AHS: Accepted MachineTeleoperationRequestV1
+>   AHS ->>+ AHT_1: Send Request
+>   AHT_1 -->>- AHS: Accepted Request
 >   AHS -)- FMS: AHT_1 Accepted Command with MachineTeleoperationResponseV1
 >   alt Machine Not at final state of Command
 >     Note over FMS, AHT_1: AHT_1 Actioning Command...
->     AHT_1 ->> AHS: MachineTeleoperationStateV1 with State Changed
+>     AHT_1 ->> AHS: Update with State Changed
 >     AHS -) FMS: AHT_1 MachineTeleoperationStateV1 with State Changed  
 >   else Machine Already ste final state of Command
 >     Note over FMS, AHT_1: No MachineTeleoperationStateV1 message will be sent
@@ -85,8 +85,8 @@ The following sections describes when the messages should be sent during the lif
 >   else AHS Accepcts Command But AHT Rejects Command
 >     FMS ->>+ AHS: POST MachineTeleoperationRequestV1 for AHT_1
 >     AHS -->> FMS: Accepted POST MachineTeleoperationRequestV1 for AHT_1
->     AHS ->>+ AHT_1: Send MachineTeleoperationRequestV1
->     AHT_1 -->>- AHS: Rejected MachineTeleoperationRequestV1
+>     AHS ->>+ AHT_1: Send Request
+>     AHT_1 -->>- AHS: Rejected Request
 >     AHS -)- FMS: AHT_1 Rejected Command with MachineTeleoperationResopnseV1
 >   end
 > ```
@@ -110,8 +110,8 @@ The following sections describes when the messages should be sent during the lif
 >   note over FMS, ... AHT_n: On Connect Sequence
 >   FMS ->>+ AHS: POST MachineTeleoperationRequestV1 for AHT_1
 >   AHS -->> FMS: Accepted POST MachineTeleoperationRequestV1 for AHT_1
->   AHS ->>+ AHT_1: Send MachineTeleoperationRequestV1
->   AHT_1 -->>- AHS: Accepted MachineTeleoperationRequestV1
+>   AHS ->>+ AHT_1: Send Request
+>   AHT_1 -->>- AHS: Accepted Request
 >   AHS -)- FMS: AHT_1 Accepted Command with MachineTeleoperationResponseV1
 >   break
 >     note over FMS, AHT_1: Exception occured when actioning
@@ -123,4 +123,5 @@ The following sections describes when the messages should be sent during the lif
 > ```
 > See [Exception Occurred Sequence Diagram](./teleoperation-exception-occurred-sequence.svg) if above mermaid code cannot be rendered.
 
-**NOTE** AHS shall sent machine teleoperation state whenever there's a state change on the AHT.
+>[!NOTE]
+> AHS shall send machine teleoperation state whenever there is a state change on the AHT.

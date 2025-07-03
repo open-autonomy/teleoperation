@@ -25,7 +25,7 @@ The purpose of Teleoperation interface is to provide and define capbility for Fl
 > State property keys that are reserved for in the `MachineTeleoperationStateV1` message.
 > | Key | Type | Values | Description |
 > | --- | ---- | ------ | ----------- |
-> | Puased | Boolean | [True, False] | A boolean state property that is used to define define whether the equipment is paused or not|
+> | Paused | Boolean | [True, False] | A boolean state property that is used to define whether the equipment is paused or not|
 
 ### Audience
 - Autonomy integrators ( typically miners )
